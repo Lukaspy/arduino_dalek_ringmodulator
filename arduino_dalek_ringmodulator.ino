@@ -139,24 +139,24 @@ void setup()
   sbi(ADMUX,MUX0); // set multiplexer to channel 1
 
   // Timer2 PWM Mode set to fast PWM 
-  cbi (TCCR2A, COM2A0);
-  sbi (TCCR2A, COM2A1);
-  sbi (TCCR2A, WGM20);
-  sbi (TCCR2A, WGM21);
+  cbi (TCCR3A, COM3A0);
+  sbi (TCCR3A, COM3A1);
+  sbi (TCCR3A, WGM30);
+  sbi (TCCR3A, WGM31);
 
-  cbi (TCCR2B, WGM22);
+  cbi (TCCR3B, WGM32);
 
   // Timer2 Clock Prescaler to : 1 
-  sbi (TCCR2B, CS20);
-  cbi (TCCR2B, CS21);
-  cbi (TCCR2B, CS22);
+  sbi (TCCR3B, CS30);
+  cbi (TCCR3B, CS31);
+  cbi (TCCR3B, CS32);
 
   // Timer2 PWM Port Enable
   sbi(DDRB,DDRB_NUM);              
 
   //cli();                         // disable interrupts to avoid distortion
   cbi (TIMSK0,TOIE0);              // disable Timer0 !!! delay is off now
-  sbi (TIMSK2,TOIE2);              // enable Timer2 Interrupt
+  sbi (TIMSK3,TOIE3);              // enable Timer2 Interrupt
 
   // dome lights  
   pinMode(DOME_LIGHT_PIN, OUTPUT);
@@ -213,7 +213,7 @@ void loop()
   }
   
   // write to pin associated with timer 2 (10 or 11 depending on board)
-  OCR2A=audioOutput;          
+  OCR3A=audioOutput;          
 
   // trigger dome lights if output signal above some threshold (hard-coded 
   // for now, but I'd like to make this variable based on a pot input so 
